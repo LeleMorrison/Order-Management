@@ -35,6 +35,7 @@ namespace ProductService.Services
             if (product == null) return false;
             product.Name = productData.Name;
             product.Price = productData.Price;
+            product.Category = productData.Category;
             await _context.SaveChangesAsync();
             return true;
         }

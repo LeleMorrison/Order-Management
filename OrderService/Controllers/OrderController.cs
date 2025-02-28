@@ -7,7 +7,7 @@ namespace OrdersService.Controllers
 {
 
     [ApiController]
-    [Route("orders")]
+    [Route("api/orders")]
     public class OrderController : ControllerBase
     {
         private readonly ServiceOrders _service;

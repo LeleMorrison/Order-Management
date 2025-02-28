@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shared.Models
 {
@@ -7,6 +8,7 @@ namespace Shared.Models
     /// </summary>
     public class Order
     {
+        [Key]
         public int Id { get; set; }
         public int UserId { get; set; }      // Riferimento all'utente che ha effettuato l'ordine
         public int AddressId { get; set; }   // Riferimento all'indirizzo di spedizione

@@ -5,7 +5,7 @@ using Shared.Models;
 namespace ProductService.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]  // "api/products"
+    [Route("api/products")]  // "api/products"
     public class ProductController : ControllerBase
     {
         private readonly ServiceProduct _service;
