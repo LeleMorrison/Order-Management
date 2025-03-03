@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserService.Database;
+using UserService.Services;
 
 namespace TestCollaudo
 {
@@ -32,6 +34,26 @@ namespace TestCollaudo
             Assert.NotNull(fetched);
             Assert.Equal("TestProduct", fetched!.Name);
             Assert.Equal(9.99m, fetched.Price);
+        }
+
+        [Fact]
+        public async Task UpdateProduct()
+        {
+            var options = new DbContextOptionsBuilder<ProductDB>()
+                                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                                .Options;
+            using var context = new ProductDB(options);
+            var service = new ServiceProduct(context);
+
+            var address = await service.CreateAsync(new Product { Name = "Pennello", Category = "Arte", Price = 20});
+            var updatedData = new Product { Category = "Bricolage", Price = 15.55m };
+            bool updated = await service.UpdateAsync(address.Id, updatedData);
+            Assert.True(updated);
+
+            var fetched = await service.GetByIdAsync(address.Id);
+            Assert.NotNull(fetched);
+            Assert.Equal("Bricolage", fetched.Category);
+            Assert.Equal(15.55m, fetched.Price);
         }
 
         [Fact]

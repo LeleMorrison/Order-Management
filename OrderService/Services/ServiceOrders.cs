@@ -50,5 +50,17 @@ namespace OrdersService.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> UpdateAsync(int id, Order orderData)
+        {
+            var product = await _context.Orders.FindAsync(id);
+            if (product == null) return false;
+            product.OrderDate = orderData.OrderDate;
+            product.AddressId= orderData.AddressId;
+            product.UserId = orderData.UserId;
+            product.Items = orderData.Items;
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

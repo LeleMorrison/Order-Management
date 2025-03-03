@@ -1,13 +1,8 @@
-﻿using AddressService.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OrdersService.Database;
 using OrdersService.Services;
 using Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace TestCollaudo
 {
@@ -60,6 +55,25 @@ namespace TestCollaudo
             Assert.True(deleted);
             var fetched = await service.GetOrderByIdAsync(order.Id);
             Assert.Null(fetched);
+        }
+
+        [Fact]
+        public async Task UpdateOrder()
+        {
+            var options = new DbContextOptionsBuilder<OrderDB>()
+                                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                                .Options;
+            using var context = new OrderDB(options);
+            var service = new ServiceOrders(context);
+
+            var address = await service.CreateOrderAsync(new Order { AddressId = 2, OrderDate = DateTime.Now, UserId = 2, Items = [this.FirstItem] });
+            var updatedData = new Order { AddressId = 4};
+            bool updated = await service.UpdateAsync(address.Id, updatedData);
+            Assert.True(updated);
+
+            var fetched = await service.GetOrderByIdAsync(address.Id);
+            Assert.NotNull(fetched);
+            Assert.Equal(4, fetched.AddressId);
         }
     }
 }

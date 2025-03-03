@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Xunit;
 using UserService.Services;
 using Shared.Models;
+using AddressService.Database;
+using AddressService.Services;
 namespace TestCollaudo
 {
     public class UsersServiceTest
@@ -28,7 +30,26 @@ namespace TestCollaudo
             Assert.Equal("Mario Rossi", fetched!.Name);
             Assert.Equal("mario@rossi.it", fetched.Email);
         }
-        public async Task UpdateUser() { }
+
+        [Fact]
+        public async Task UpdateUser() 
+        {
+            var options = new DbContextOptionsBuilder<UserDB>()
+                                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                                .Options;
+            using var context = new UserDB(options);
+            var service = new ServiceUser(context);
+
+            var address = await service.CreateAsync(new User { Name = "Pippo", Email = "pippo@pluto.it"});
+            var updatedData = new User { Name = "Pippo Pluto" };
+            bool updated = await service.UpdateAsync(address.Id, updatedData);
+            Assert.True(updated);
+
+            var fetched = await service.GetByIdAsync(address.Id);
+            Assert.NotNull(fetched);
+            Assert.Equal("Pippo Pluto", fetched.Name);
+        }
+
         [Fact]
         public async Task DeleteUser()
         {
