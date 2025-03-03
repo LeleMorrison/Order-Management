@@ -16,31 +16,28 @@ namespace OrdersService.Services
         {
             _context = context;
         }
+        // Ottengo tutti gli ordini
         public async Task<List<Order>> GetAllOrdersAsync()
         {
-            // Eager loading degli OrderItem
             return await _context.Orders
                 .Include(o => o.Items)
                 .ToListAsync();
         }
-
+        // Ottengo un ordine per ID
         public async Task<Order?> GetOrderByIdAsync(int id)
         {
             return await _context.Orders
                 .Include(o => o.Items)
                 .FirstOrDefaultAsync(o => o.Id == id);
         }
-
+        // Creo un nuovo ordine
         public async Task<Order> CreateOrderAsync(Order order)
         {
-            // Salviamo l'ordine e i suoi OrderItem
-            // EF creerà automaticamente record in OrderItems
-            // perché Items è collegato.
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
             return order;
         }
-
+        // Elimino un ordine
         public async Task<bool> DeleteOrderAsync(int id)
         {
             var existing = await _context.Orders.FindAsync(id);
@@ -50,7 +47,7 @@ namespace OrdersService.Services
             await _context.SaveChangesAsync();
             return true;
         }
-
+        // Aggiorno un ordine
         public async Task<bool> UpdateAsync(int id, Order orderData)
         {
             var product = await _context.Orders.FindAsync(id);
