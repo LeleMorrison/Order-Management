@@ -7,5 +7,6 @@ namespace ProductService.Database
     {
         public ProductDB(DbContextOptions<ProductDB> options) : base(options) { }
         public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<Category> Category { get; set; } = null!;
     }
 }

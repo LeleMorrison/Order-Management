@@ -5,6 +5,7 @@ using System.Net.Http.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
 
 // Abilita CORS per consentire chiamate da qualsiasi origine (solo per sviluppo)
 builder.Services.AddCors(options =>

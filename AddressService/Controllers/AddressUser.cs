@@ -5,7 +5,7 @@ using Shared.Models;
 namespace AddressService.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]  // "api/addresses"
+    [Route("api/addresses")]  // "api/addresses"
     public class AddresseController : ControllerBase
     {
         private readonly ServiceAddress _service;

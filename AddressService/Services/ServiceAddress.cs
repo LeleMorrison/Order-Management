@@ -11,24 +11,24 @@ namespace AddressService.Services
         {
             _context = context;
         }
-
+        // Ottengo tutti gli indirizzi
         public async Task<List<Address>> GetAllAsync()
         {
             return await _context.Addresses.ToListAsync();
         }
-
+        // Ottengo un indirizzo per ID
         public async Task<Address?> GetByIdAsync(int id)
         {
             return await _context.Addresses.FindAsync(id);
         }
-
+        // Creo un nuovo indirizzo
         public async Task<Address> CreateAsync(Address address)
         {
             _context.Addresses.Add(address);
             await _context.SaveChangesAsync();
             return address;
         }
-
+        // Aggiorno un indirizzo
         public async Task<bool> UpdateAsync(int id, Address addressData)
         {
             var address = await _context.Addresses.FindAsync(id);
@@ -39,7 +39,7 @@ namespace AddressService.Services
             await _context.SaveChangesAsync();
             return true;
         }
-
+        // Elimino un indirizzo
         public async Task<bool> DeleteAsync(int id)
         {
             var address = await _context.Addresses.FindAsync(id);

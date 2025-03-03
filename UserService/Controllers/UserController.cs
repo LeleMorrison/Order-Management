@@ -5,7 +5,7 @@ using UserService.Services;
 namespace UserService.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]  // "api/users"
+    [Route("api/users")]  // "api/users"
     public class UserController : ControllerBase
     {
         private readonly ServiceUser _service;
