@@ -1,11 +1,24 @@
+# Info
 
-## Requisiti
+## Architettura a microservizi.
+
+![VP71ReCm44Jl_WehkRI7v1EgE0KXf5PGY5LLwiN2Mq9Zx6YzDEBlwmPGA59xtPstCwFTUL98NMkOFpNsh52rt3GMg3y3TqX7nnX2HShM1lXAfk_sBlPR_ldI0VRtAwuybobV2zDKi3STpDKYJtcY22wg3rY66l1PMLL32vQsOJlmYJZ4h-ADhv-Q-aWb0PZbfIlhIy2lO7E5iYAAYt9a](https://github.com/user-attachments/assets/633e8e48-abe6-492e-8bbd-48e850d070b2)
+
+ogni Microservizio ha il proprio DB (SQL Lite).
+
+## Diagramma entità
+
+![ZPFFJi9048VlVOe95_mZHAx4610n8J688WymTaSoeTqrirCICBwBHz-35tDRgisY1qxDVDtvflDhE_2AeaMU9Nx5zWq5SqWpz7weAlnIA4rIP-Uy9RXCaZQChRBkFi4mpCIP8bK_9rbpIadLzaFXFG4uXuc1Fh3LgfXYJg7qGMoN5Pa9foKob7AEMVAHr9OHAYsTR6fDA2DJg6DPQ6p3](https://github.com/user-attachments/assets/f09be162-4706-463e-b19d-a527dae51a88)
+
+
+
+# Requisiti
 
 - .NET 8 SDK (o superiore) installato.
 - Un editor come Visual Studio 2022 (o VS Code) per eseguire la soluzione.
 - (Opzionale) Git, se si vuole clonare il progetto da un repository.
 
-## Istruzioni per l'installazione e l'avvio
+# Istruzioni per l'installazione e l'avvio
 
 1. **Clonazione del repository:**  
    Esegui il comando seguente per clonare il progetto da GitHub:
@@ -16,7 +29,7 @@
 
 
 
-## Ripristino dei pacchetti e build:
+# Ripristino dei pacchetti e build:
 Apri la soluzione in Visual Studio oppure, da linea di comando, posizionati nella cartella del progetto ed esegui:
 ```bash
 dotnet restore
